@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri May  2 10:28:03 2025
+Created on Wed Sep 10 15:53:20 2025
 
 @author: burak
 """
@@ -24,12 +24,20 @@ sc = StandardScaler()
 x_train=sc.fit_transform(x_train)
 x_test=sc.fit_transform(x_test)
 
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 
-logr = LogisticRegression(random_state=0)
-logr.fit(x_train,y_train)
+rf = RandomForestClassifier(n_estimators=10 ,criterion='entropy')
 
-y_predict = logr.predict(x_test)
+rf.fit(x_train, y_train)
+
+y_pred = rf.predict(x_test)
 
 from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(y_test, y_predict)
+
+cm = confusion_matrix(y_test, y_pred)
+
+print ('RF')
+
+print(cm)
+
+

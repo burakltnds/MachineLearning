@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri May  2 10:28:03 2025
+Created on Wed Sep 10 15:35:37 2025
 
 @author: burak
 """
+
 
 import numpy as np
 import pandas as pd
@@ -24,12 +25,16 @@ sc = StandardScaler()
 x_train=sc.fit_transform(x_train)
 x_test=sc.fit_transform(x_test)
 
-from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
 
-logr = LogisticRegression(random_state=0)
-logr.fit(x_train,y_train)
+dtc = DecisionTreeClassifier(criterion='entropy')
 
-y_predict = logr.predict(x_test)
+dtc.fit(x_train, y_train)
+y_pred = dtc.predict(x_test)
 
 from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(y_test, y_predict)
+
+cm = confusion_matrix (y_test,y_pred)
+print('DTC')
+print(cm)
+
